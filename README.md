@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Notice
 
-[2020-10-16] This project is being developed. Any modifications are not commited.
+[2020-10-16] This project is being developed. Any modifications are not commited yet.
 
 ## The role(or funtionality) of this
 
