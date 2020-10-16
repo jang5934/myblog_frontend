@@ -9,4 +9,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 This server will present a blog web page with received json data from 'myblog_backend'.
 So, it will developed to work with only 'myblog_backend'.
 
-'myblog_backend github' : https://github.com/jang5934/myblog_backend
+github link for 'myblog_backend' : https://github.com/jang5934/myblog_backend
