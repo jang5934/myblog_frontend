@@ -6,10 +6,10 @@ const sidebarStyle = {
     transition: `height ${duration}ms`
 }
 const sidebarTransitionStyles = {
-    entering: { height: '40px' },
-    entered: { height: '200px' },
-    exiting: { height: '200px' },
-    exited: { height: '40px' }
+    entering: { height: '0px' },
+    entered: { height: '130px' },
+    exiting: { height: '130px' },
+    exited: { height: '0px' }
 }
 const linkStyle = {
     transition: `opacity ${duration}ms`
@@ -29,9 +29,9 @@ export default class SidebarSubCategory extends Component {
                     ...linkStyle,
                     ...linkTransitionStyles[state]
                 }}>
-                    <div className="sidebar-link">Sub1</div>
-                    <div className="sidebar-link">Sub2</div>
-                    <div className="sidebar-link">Sub3</div>
+                    <div className="sidebar-sub-category">Sub1</div>
+                    <div className="sidebar-sub-category">Sub2</div>
+                    <div className="sidebar-sub-category">Sub3</div>
                 </div>
             )}
         </Transition>

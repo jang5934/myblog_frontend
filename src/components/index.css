@@ -19,17 +19,22 @@ body {
     padding-top: 100px;
 }
 
-.sidebar-link {
-    padding: 10px;
-}
-
-.sidebar-link:hover {
-    background-color: gainsboro;
-}
-
 .sidebar-category {
     background-color: rgb(68, 68, 68);
     position: relative;
+}
+
+.sidebar-sub-category {
+    padding: 10px;
+}
+
+.sidebar-sub-category:hover {
+    background-color: gainsboro;
+}
+
+.sidebar-super-category {
+    padding: 10px;
+    font-size: 24px;
 }
 
 .sidebar-super-category:hover {

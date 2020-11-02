@@ -18,7 +18,7 @@ export default class SidebarCategory extends Component {
             <div className="sidebar-super-category" onClick={this.toggleSidebar}>
                 <SidebarSupCategory name="temp"/>
             </div>
-            <div className="sidebar-sub-category">
+            <div>
                 <SidebarSubCategory isOpen={this.state.isOpen}/>
             </div>
         </div>
