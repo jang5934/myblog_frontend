@@ -10,7 +10,7 @@ body {
 
 .sidebar-container {
     min-height: 100vh;
-    background-color: lightgray;
+    background-color: rgb(68, 68, 68);
     position: relative;
 }
 
@@ -24,6 +24,15 @@ body {
 }
 
 .sidebar-link:hover {
+    background-color: gainsboro;
+}
+
+.sidebar-category {
+    background-color: rgb(68, 68, 68);
+    position: relative;
+}
+
+.sidebar-super-category:hover {
     background-color: gainsboro;
 }
 

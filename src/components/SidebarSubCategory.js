@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
 import { Transition } from 'react-transition-group'
-import SidebarCategory from './SidebarCategory'
 
-const duration = 250
-
+const duration = 100
 const sidebarStyle = {
-    transition: `width ${duration}ms`
+    transition: `height ${duration}ms`
 }
 const sidebarTransitionStyles = {
-    entering: { width: '40px' },
-    entered: { width: '200px' },
-    exiting: { width: '200px' },
-    exited: { width: '40px' }
+    entering: { height: '40px' },
+    entered: { height: '200px' },
+    exiting: { height: '200px' },
+    exited: { height: '40px' }
 }
-
 const linkStyle = {
     transition: `opacity ${duration}ms`
 }
@@ -24,7 +21,7 @@ const linkTransitionStyles = {
     exited: { opacity: 0 }
 }
 
-export default class SidebarContent extends Component {
+export default class SidebarSubCategory extends Component {
     renderLinks = () => {
         return <Transition in={this.props.isOpen} timeout={duration}>
             {(state) => (
@@ -32,8 +29,9 @@ export default class SidebarContent extends Component {
                     ...linkStyle,
                     ...linkTransitionStyles[state]
                 }}>
-                    <SidebarCategory/>
-                    <SidebarCategory/>
+                    <div className="sidebar-link">Sub1</div>
+                    <div className="sidebar-link">Sub2</div>
+                    <div className="sidebar-link">Sub3</div>
                 </div>
             )}
         </Transition>
@@ -42,7 +40,7 @@ export default class SidebarContent extends Component {
     render() {
         return <Transition in={this.props.isOpen} timeout={duration}>
             {(state) => (
-                <div className="sidebar" style={{
+                <div className="sidebar-category" style={{
                     ...sidebarStyle,
                     ...sidebarTransitionStyles[state]
                     }}>
