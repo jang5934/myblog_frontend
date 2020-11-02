@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Sidebar from './Sidebar'
+import Sidebar from './Sidebar/Sidebar'
 import Content from './Content'
 class App extends Component {
   render() {
