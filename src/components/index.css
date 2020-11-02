@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+.app {
+    display: flex;
+}
+
+.sidebar-container {
+    min-height: 100vh;
+    background-color: lightgray;
+    position: relative;
+}
+
+.sidebar {
+    width: 200px;
+    padding-top: 100px;
+}
+
+.sidebar-link {
+    padding: 10px;
+}
+
+.sidebar-link:hover {
+    background-color: gainsboro;
+}
+
+.content-container {
+    padding: 25px;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.5em;
+}
+
+.sidebar-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
