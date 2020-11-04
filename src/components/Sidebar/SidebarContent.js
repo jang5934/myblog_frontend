@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Transition } from 'react-transition-group'
-import SidebarCategory from './SidebarCategory'
+import SidebarCategory from './SidebarCategory/SidebarCategory'
+import Axios from 'axios'
 
 const duration = 250
-
 const sidebarStyle = {
     transition: `width ${duration}ms`
 }
@@ -13,7 +13,6 @@ const sidebarTransitionStyles = {
     exiting: { width: '200px' },
     exited: { width: '40px' }
 }
-
 const linkStyle = {
     transition: `opacity ${duration}ms`
 }
@@ -25,15 +24,48 @@ const linkTransitionStyles = {
 }
 
 export default class SidebarContent extends Component {
-    renderLinks = () => {
+    state = {
+        categories: ""
+    }
+
+    async componentDidMount() {
+        const apiUrl = '/blog/allCategories'
+
+        const instance = Axios.create({
+            baseURL: 'http://localhost:4000/',
+            timeout: 3000,
+            // headers: {},
+        })
+
+        try {
+            const response = await instance.get(apiUrl)
+            this.setState({
+                categories: response
+            })
+        } catch(error) {
+            console.error(error)
+        }
+    }
+
+    createCategory = () => {
+        const categories = []
+
+        if(this.state.categories !== "") {
+            this.state.categories.data.forEach(
+                (cat) => categories.push(<SidebarCategory category={cat}/>)
+            )
+        }
+        return categories
+    }
+
+    renderCategory = () => {
         return <Transition in={this.props.isOpen} timeout={duration}>
             {(state) => (
                 <div style={{
                     ...linkStyle,
                     ...linkTransitionStyles[state]
                 }}>
-                    <SidebarCategory/>
-                    <SidebarCategory/>
+                    {this.createCategory()}
                 </div>
             )}
         </Transition>
@@ -46,7 +78,7 @@ export default class SidebarContent extends Component {
                     ...sidebarStyle,
                     ...sidebarTransitionStyles[state]
                     }}>
-                    {this.renderLinks()}
+                    {this.renderCategory()}
                 </div>
             )}
             </Transition>

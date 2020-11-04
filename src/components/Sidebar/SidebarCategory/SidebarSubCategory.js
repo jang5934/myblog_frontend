@@ -22,22 +22,34 @@ const linkTransitionStyles = {
 }
 
 export default class SidebarSubCategory extends Component {
+    state = {
+        subcategories: this.props.subcategories
+    }
+
     renderLinks = () => {
+        const sub_categories = []
+
+        this.state.subcategories.forEach(item =>
+             sub_categories.push(<div className="sidebar-sub-category">{item.sc_subject}</div>)
+        )
         return <Transition in={this.props.isOpen} timeout={duration}>
             {(state) => (
                 <div style={{
                     ...linkStyle,
                     ...linkTransitionStyles[state]
                 }}>
-                    <div className="sidebar-sub-category">Sub1</div>
-                    <div className="sidebar-sub-category">Sub2</div>
-                    <div className="sidebar-sub-category">Sub3</div>
+                    {sub_categories}
                 </div>
             )}
         </Transition>
     }
 
     render() {
+        let size = this.state.subcategories.length * 40 + 10 + "px";
+
+        sidebarTransitionStyles.entered = { height: size };
+        sidebarTransitionStyles.exiting = { height: size };
+
         return <Transition in={this.props.isOpen} timeout={duration}>
             {(state) => (
                 <div className="sidebar-category" style={{
