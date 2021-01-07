@@ -12,10 +12,10 @@ export default class Sidebar extends Component {
             isOpen: !prevState.isOpen
         }))
     }
-    
+
     render() {
         return <div className="sidebar-container">
-                <SidebarContent isOpen={this.state.isOpen} />
+            <SidebarContent isOpen={this.state.isOpen} />
             <div className="sidebar-icon">
                 <SidebarIcon
                     isOpen={this.state.isOpen}

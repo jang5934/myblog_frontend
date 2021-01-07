@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Transition } from 'react-transition-group'
+import { Link } from 'react-router-dom'
 
 const duration = 100
 const sidebarStyle = {
@@ -27,10 +28,20 @@ export default class SidebarSubCategory extends Component {
     }
 
     renderLinks = () => {
+        const subCatStyle = {
+            textDecoration: 'none',
+            color: 'white',
+        }
+
         const sub_categories = []
 
         this.state.subcategories.forEach(item =>
-             sub_categories.push(<div className="sidebar-sub-category">{item.sc_subject}</div>)
+            sub_categories.push(
+                <Link to="/read" style={subCatStyle}>
+                    <div className="sidebar-sub-category">
+                        {item.sc_subject}
+                    </div>
+                </Link>)
         )
         return <Transition in={this.props.isOpen} timeout={duration}>
             {(state) => (
@@ -55,10 +66,10 @@ export default class SidebarSubCategory extends Component {
                 <div className="sidebar-category" style={{
                     ...sidebarStyle,
                     ...sidebarTransitionStyles[state]
-                    }}>
+                }}>
                     {this.renderLinks()}
                 </div>
             )}
-            </Transition>
+        </Transition>
     }
 }

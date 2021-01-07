@@ -42,7 +42,7 @@ export default class SidebarContent extends Component {
             this.setState({
                 categories: response
             })
-        } catch(error) {
+        } catch (error) {
             console.error(error)
         }
     }
@@ -50,9 +50,9 @@ export default class SidebarContent extends Component {
     createCategory = () => {
         const categories = []
 
-        if(this.state.categories !== "") {
+        if (this.state.categories !== "") {
             this.state.categories.data.forEach(
-                (cat) => categories.push(<SidebarCategory category={cat}/>)
+                (cat) => categories.push(<SidebarCategory category={cat} />)
             )
         }
         return categories
@@ -77,10 +77,10 @@ export default class SidebarContent extends Component {
                 <div className="sidebar" style={{
                     ...sidebarStyle,
                     ...sidebarTransitionStyles[state]
-                    }}>
+                }}>
                     {this.renderCategory()}
                 </div>
             )}
-            </Transition>
+        </Transition>
     }
 }

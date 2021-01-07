@@ -31,6 +31,5 @@ export default class SidebarCategory extends Component {
         else {
             return ;
         }
-            
     }
 }
