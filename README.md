@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Notice
 
 [2020-10-16] This project is being developed. Any modifications are not commited yet.<br>
-[2020-11-05] Under construction...
+[2020-11-05] Under construction...<br>
 [2021-01-07] Long time updates. Happy New Year!
 1) sidebar icon is updated.
 2) post viewer module is under developed.
