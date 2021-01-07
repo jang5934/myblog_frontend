@@ -7,7 +7,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 [2021-01-07] Long time updates. Happy New Year!
 1) sidebar icon is updated.
 2) post viewer module is under developed.
-3) The text editor that used in this blog service is 'draft.js'. So blog_posts that will be stored in this blog will be wrote by draft.js wyswyg in 'draft.js status format'
+3) The text editor that used in this blog service is 'draft.js'.<br>
+So blog posts that will be stored in this blog will be wrote by draft.js wyswyg in 'draft.js status format'
 
 ## The role(or funtionality) of this
 
