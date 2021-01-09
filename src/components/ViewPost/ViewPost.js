@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import ViewPostNums from './ViewPostNums'
 export default class ViewPost extends Component{
     state = {
         subCatNumber : null,
@@ -11,16 +11,23 @@ export default class ViewPost extends Component{
         postBody : null,
     }
 
+    constructor(props){
+        super(props)
+        
+        this.state = {
+            subCatNumber: 1,
+            subCatSubject: "서브 카테고리 제목",
+            postTotalCount: 100,
+            postNumber: 2,
+            postSubject: "포스트 제목",
+            postDate: "2021/01/06",
+            postBody: "ㅋㅋㅋ<br>ㅠㅠㅠㅠ<br>ㅎㅎㅎㅎ",
+        }
+    }
+
     render() {
 
-        this.state.subCatNumber = 1
-        this.state.subCatSubject = "서브 카테고리 제목"
-        this.state.postTotalCount = 100
-        this.state.postNumber = 2
-        this.state.postSubject = "포스트 제목"
-        this.state.postDate = "2021/01/06"
-        this.state.postBody = "ㅋㅋㅋ<br>ㅠㅠㅠㅠ<br>ㅎㅎㅎㅎ"
-        
+
         return <div className="view-post">
             <div className="view-post-sub-category-subject">
                 {this.state.subCatSubject}
@@ -34,6 +41,7 @@ export default class ViewPost extends Component{
             <div className="view-post-body">
                 {this.state.postBody}
             </div>
+            <ViewPostNums/>
         </div>
     }
 }

@@ -77,3 +77,13 @@ body {
     text-align: center;
     margin-bottom: 30px;
 }
+
+.view-post-numbering {
+    display: table;
+    table-layout: fixed;
+    border-spacing: 10px;
+}
+
+.view-post-numbering-element {
+    display: table-cell;
+}
