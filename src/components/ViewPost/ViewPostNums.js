@@ -15,8 +15,8 @@ export default class ViewPostNums extends Component {
         super(props)
         
         //Todo - rest로 해당 서브카테고리의 포스트 갯수 가져오기
-        const dataTotPostNum = 6
-        const dataCurPostNum = 6
+        const dataTotPostNum = 20
+        const dataCurPostNum = 16
 
         if (dataTotPostNum === 0) {
             return null
@@ -38,7 +38,7 @@ export default class ViewPostNums extends Component {
     makeRenderContext = () => {
         var renderContext = []
         if (this.state.curRangeNum !== this.state.totRangeNum) {
-            renderContext.push(<img src={left_arrow} class="view-post-numbering-element" onClick={this.move_left} size="30px" alt="left" />)
+            renderContext.push(<img src={left_arrow} class="view-post-numbering-element" onClick={this.move_left} size="20px" alt="left" />)
         }
 
         var startNum = this.state.curRangeNum * 5;
@@ -54,7 +54,7 @@ export default class ViewPostNums extends Component {
                 break;
             }
 
-            if ((startNum - i) === this.curPostNum)
+            if ((startNum - i) === this.state.curPostNum)
                 renderContext.push(<div class="view-post-numbering-element" alt="selected"><b>{startNum - i}</b></div>)
             else
                 renderContext.push(<div class="view-post-numbering-element" onclick="">{startNum - i}</div>)
@@ -62,7 +62,7 @@ export default class ViewPostNums extends Component {
         }
 
         if (this.state.curRangeNum !== 1)
-            renderContext.push(<img src={right_arrow} class="view-post-numbering-element" onClick={this.move_right} size="30px" alt="right" />)
+            renderContext.push(<img src={right_arrow} class="view-post-numbering-element" onClick={this.move_right} size="20px" alt="right" />)
 
         return renderContext
     }
