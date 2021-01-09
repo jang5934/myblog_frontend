@@ -13,20 +13,16 @@ export default class ViewPostNums extends Component {
 
     constructor(props) {
         super(props)
-        
-        //Todo - rest로 해당 서브카테고리의 포스트 갯수 가져오기
-        const dataTotPostNum = 20
-        const dataCurPostNum = 16
 
-        if (dataTotPostNum === 0) {
+        if (props.totPostNum === 0) {
             return null
         }
         else {
             this.state = {
-                totPostNum: dataTotPostNum,
-                curPostNum: dataCurPostNum,
-                totRangeNum: this.floatToint(dataTotPostNum / 5) + (dataTotPostNum % 5 === 0 ? 0 : 1),
-                curRangeNum: this.floatToint(dataCurPostNum / 5) + (dataCurPostNum % 5 === 0 ? 0 : 1),
+                totPostNum: props.totPostNum,
+                curPostNum: props.curPostNum,
+                totRangeNum: this.floatToint(props.totPostNum / 5) + (props.totPostNum % 5 === 0 ? 0 : 1),
+                curRangeNum: this.floatToint(props.curPostNum / 5) + (props.curPostNum % 5 === 0 ? 0 : 1),
             }
         }
     }
@@ -38,19 +34,19 @@ export default class ViewPostNums extends Component {
     makeRenderContext = () => {
         var renderContext = []
         if (this.state.curRangeNum !== this.state.totRangeNum) {
-            renderContext.push(<img src={left_arrow} class="view-post-numbering-element" onClick={this.move_left} size="20px" alt="left" />)
+            renderContext.push(<img src={left_arrow} class="view-post-numbering-element" onClick={this.move_left} alt="left" />)
         }
 
         var startNum = this.state.curRangeNum * 5;
-        startNum = startNum > this.state.totPostNum ?this.state.totPostNum : startNum;
+        startNum = startNum > this.state.totPostNum ? this.state.totPostNum : startNum;
 
         if (this.state.totRangeNum === this.state.curRangeNum && startNum > this.state.totPostNum) {
             startNum = this.state.totPostNum;
         }
 
         var i = 0;
-        while(1) {
-            if((startNum - i) === (this.state.curRangeNum - 1) * 5) {
+        while (1) {
+            if ((startNum - i) === (this.state.curRangeNum - 1) * 5) {
                 break;
             }
 
@@ -62,22 +58,22 @@ export default class ViewPostNums extends Component {
         }
 
         if (this.state.curRangeNum !== 1)
-            renderContext.push(<img src={right_arrow} class="view-post-numbering-element" onClick={this.move_right} size="20px" alt="right" />)
+            renderContext.push(<img src={right_arrow} class="view-post-numbering-element" onClick={this.move_right} alt="right" />)
 
         return renderContext
     }
 
     move_left = () => {
         this.setState({
-             curRangeNum: (this.state.totRangeNum > this.state.curRangeNum? this.state.curRangeNum + 1 : this.state.curRangeNum)
-            })
+            curRangeNum: this.state.curRangeNum + 1
+        })
     }
 
 
     move_right = () => {
         this.setState({
-                curRangeNum: (1 < this.state.curRangeNum? this.state.curRangeNum - 1 : this.state.curRangeNum)
-            })
+            curRangeNum: this.state.curRangeNum - 1
+        })
     }
 
 
