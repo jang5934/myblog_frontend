@@ -9,6 +9,8 @@ export default class ViewPostNums extends Component {
         curPostNum: null,
         totRangeNum: null,
         curRangeNum: null,
+        navHandler: null,
+        postNumMap: null,
     }
 
     constructor(props) {
@@ -23,6 +25,8 @@ export default class ViewPostNums extends Component {
                 curPostNum: props.curPostNum,
                 totRangeNum: this.floatToint(props.totPostNum / 5) + (props.totPostNum % 5 === 0 ? 0 : 1),
                 curRangeNum: this.floatToint(props.curPostNum / 5) + (props.curPostNum % 5 === 0 ? 0 : 1),
+                navHandler: props.navHandler,
+                postNumMap: props.postNumMap,
             }
         }
     }
@@ -32,33 +36,32 @@ export default class ViewPostNums extends Component {
     }
 
     makeRenderContext = () => {
-        var renderContext = []
+        let renderContext = []
         if (this.state.curRangeNum !== this.state.totRangeNum) {
-            renderContext.push(<img src={left_arrow} class="view-post-numbering-element" onClick={this.move_left} alt="left" />)
+            renderContext.push(<img src={left_arrow} className="view-post-numbering-element" key="leftButton" onClick={this.move_left} alt="left" />)
         }
 
-        var startNum = this.state.curRangeNum * 5;
+        let startNum = this.state.curRangeNum * 5;
         startNum = startNum > this.state.totPostNum ? this.state.totPostNum : startNum;
 
         if (this.state.totRangeNum === this.state.curRangeNum && startNum > this.state.totPostNum) {
             startNum = this.state.totPostNum;
         }
 
-        var i = 0;
-        while (1) {
-            if ((startNum - i) === (this.state.curRangeNum - 1) * 5) {
-                break;
-            }
-
+        for (let i = 0; (startNum - i) !== (this.state.curRangeNum - 1) * 5; i++) {
             if ((startNum - i) === this.state.curPostNum)
-                renderContext.push(<div class="view-post-numbering-element" alt="selected"><b>{startNum - i}</b></div>)
-            else
-                renderContext.push(<div class="view-post-numbering-element" onclick="">{startNum - i}</div>)
-            i++;
+                renderContext.push(<div className="view-post-numbering-element" key={startNum - i} alt="selected"><b>{startNum - i}</b></div>)
+            else {
+                renderContext.push(<div className="view-post-numbering-element" key={startNum - i}
+                    onClick={() => {
+                        this.state.navHandler(startNum - i)
+                    }
+                    }>{startNum - i}</div>)
+            }
         }
 
         if (this.state.curRangeNum !== 1)
-            renderContext.push(<img src={right_arrow} class="view-post-numbering-element" onClick={this.move_right} alt="right" />)
+            renderContext.push(<img src={right_arrow} className="view-post-numbering-element" key="rightButton" onClick={this.move_right} alt="right" />)
 
         return renderContext
     }

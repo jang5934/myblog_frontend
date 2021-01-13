@@ -37,7 +37,9 @@ export default class SidebarSubCategory extends Component {
 
         this.state.subcategories.forEach(item =>
             sub_categories.push(
-                <Link to="/read" style={subCatStyle}>
+                <Link
+                    to={`/read/${item.sc_id}`}
+                    style={subCatStyle} key={item.sc_id}>
                     <div className="sidebar-sub-category">
                         {item.sc_subject}
                     </div>

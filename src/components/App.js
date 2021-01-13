@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import { FirstPage, ReadPost, WritePost } from './pages';
+import { FirstPage, WritePost } from './pages';
+import ViewPost from './ViewPost/ViewPost';
 import Sidebar from './Sidebar/Sidebar';
 
 class App extends Component {
@@ -9,7 +10,7 @@ class App extends Component {
             <div className="app">
                 <Sidebar/>
                 <Route exact path="/" component={FirstPage}/>
-                <Route path="/read" component={ReadPost}/>
+                <Route path="/read/:scid" component={ViewPost}/>
                 <Route path="/write" component={WritePost}/>
             </div>
         )

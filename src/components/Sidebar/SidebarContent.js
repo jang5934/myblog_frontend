@@ -52,7 +52,7 @@ export default class SidebarContent extends Component {
 
         if (this.state.categories !== "") {
             this.state.categories.data.forEach(
-                (cat) => categories.push(<SidebarCategory category={cat} />)
+                (cat) => categories.push(<SidebarCategory category={cat} key={cat.c_id}/>)
             )
         }
         return categories

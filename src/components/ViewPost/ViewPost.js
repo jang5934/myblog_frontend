@@ -15,21 +15,32 @@ export default class ViewPost extends Component {
     constructor(props) {
         super(props)
 
-        //TODO - REST로 포스트 받아오는 부분 짜야함
+        let tempNummap = [0, 1, 2, 4, 5, 6, 10, 12, 14, 15, 16, 17, 18, 19, 22, 23, 24]
 
+        //TODO - REST로 포스트 받아오는 부분 짜야함
+        // 아래는 더미 데이터임
         this.state = {
-            subCatNumber: 1,
+            subCatNumber: props.match.params.scid,
             subCatSubject: "서브 카테고리 제목",
-            postTotalCount: 10,
-            postNumber: 2,
+            postTotalCount: 16,
+            postNumber: 16,
             postSubject: "포스트 제목",
             postDate: "2021/01/06",
             postBody: <div>ㅋㅋㅋ<br></br>ㅠㅠㅠㅠ<br></br>ㅎㅎㅎㅎ</div>,
+            postNumMap: tempNummap,
         }
     }
 
-    navHandler = () => {
+    navHandler(postNum){
+        // 이부분에서는 실제 포스트 번호에 해당하는 포스트의 전체 정보를 POST로 얻어온 뒤
+        // 현 컴퍼넌트의 상태값을 얻어온 값으로 덮어써줘야함.
+        // 일단 더미데이터 넣을것임.
+        alert(postNum)
+        console.log(this)
+    }
 
+    componentWillReceiveProps() {
+        alert(this.props.match.params.scid)
     }
 
     render() {
