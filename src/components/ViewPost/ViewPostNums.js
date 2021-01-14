@@ -51,6 +51,9 @@ export default class ViewPostNums extends Component {
             else {
                 renderContext.push(<div className="view-post-numbering-element" key={startNum - i}
                     onClick={() => {
+                        this.setState({
+                            curPostNum: startNum - i,
+                        })
                         this.state.navHandler(startNum - i)
                     }
                     }>{startNum - i}</div>)

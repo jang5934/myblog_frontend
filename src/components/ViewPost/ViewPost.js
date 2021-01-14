@@ -14,29 +14,11 @@ export default class ViewPost extends Component {
         postNumMap: null,
     }
 
-    /*
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            subCatNumber: props.match.params.scid,
-            subCatSubject: "서브 카테고리 제목",
-            postTotalCount: 16,
-            postNumber: 16,
-            postSubject: "포스트 제목",
-            postDate: "2021/01/06",
-            postBody: <div>ㅋㅋㅋ<br></br>ㅠㅠㅠㅠ<br></br>ㅎㅎㅎㅎ</div>,
-            postNumMap: null,
-        }
-    }
-    */
-
-    async componentDidMount() {
+    componentDidMount() {
         this.setSubCatInfo(this.props.match)
-        this.setPostData(this.state.postNumber)
     }
 
-    async componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) {
         let prev = prevProps.match
         let current = this.props.match
 
@@ -70,6 +52,7 @@ export default class ViewPost extends Component {
                 postNumber: retPostNumMap.length - 1,
                 postNumMap: retPostNumMap,
             })
+            this.setPostData(this.state.postNumber)
 
         } catch (error) {
             console.error(error)
@@ -85,8 +68,9 @@ export default class ViewPost extends Component {
 
         try {
             const response = await instance.get(postDataRetrievAddr)
-            
+
             this.setState({
+                postNumber: postId,
                 postSubject: response.data.page_subject,
                 postDate: response.data.create_date,
                 postBody: response.data.page_body,
@@ -125,7 +109,7 @@ export default class ViewPost extends Component {
             </div>;
         }
         else {
-            return <div></div>
+            return null
         }
     }
 }
