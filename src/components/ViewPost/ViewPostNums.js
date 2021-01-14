@@ -16,10 +16,7 @@ export default class ViewPostNums extends Component {
     constructor(props) {
         super(props)
 
-        if (props.totPostNum === 0) {
-            return null
-        }
-        else {
+        if (props.totPostNum !== 0) {
             this.state = {
                 totPostNum: props.totPostNum,
                 curPostNum: props.curPostNum,
@@ -81,8 +78,13 @@ export default class ViewPostNums extends Component {
 
 
     render() {
-        return <div className="view-post-numbering">
-            {this.makeRenderContext()}
-        </div>
+        if (this.state.totPostNum !== null) {
+            return <div className="view-post-numbering">
+                {this.makeRenderContext()}
+            </div>
+        }
+        else {
+            return <div></div>
+        }
     }
 }

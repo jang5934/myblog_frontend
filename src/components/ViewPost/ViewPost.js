@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ViewPostNums from './ViewPostNums'
+import Axios from 'axios'
 
 export default class ViewPost extends Component {
     state = {
@@ -10,15 +11,13 @@ export default class ViewPost extends Component {
         postSubject: null,
         postDate: null,
         postBody: null,
+        postNumMap: null,
     }
 
+    /*
     constructor(props) {
         super(props)
 
-        let tempNummap = [0, 1, 2, 4, 5, 6, 10, 12, 14, 15, 16, 17, 18, 19, 22, 23, 24]
-
-        //TODO - REST로 포스트 받아오는 부분 짜야함
-        // 아래는 더미 데이터임
         this.state = {
             subCatNumber: props.match.params.scid,
             subCatSubject: "서브 카테고리 제목",
@@ -27,43 +26,106 @@ export default class ViewPost extends Component {
             postSubject: "포스트 제목",
             postDate: "2021/01/06",
             postBody: <div>ㅋㅋㅋ<br></br>ㅠㅠㅠㅠ<br></br>ㅎㅎㅎㅎ</div>,
-            postNumMap: tempNummap,
+            postNumMap: null,
+        }
+    }
+    */
+
+    async componentDidMount() {
+        this.setSubCatInfo(this.props.match)
+        this.setPostData(this.state.postNumber)
+    }
+
+    async componentDidUpdate(prevProps) {
+        let prev = prevProps.match
+        let current = this.props.match
+
+        // URL을 통해 새로 받아온 서브 카테고리의 id가 기존의 것과 다른 경우
+        if (prev.params.scid !== current.params.scid) {
+            this.setSubCatInfo(current)
         }
     }
 
-    navHandler(postNum){
-        // 이부분에서는 실제 포스트 번호에 해당하는 포스트의 전체 정보를 POST로 얻어온 뒤
-        // 현 컴퍼넌트의 상태값을 얻어온 값으로 덮어써줘야함.
-        // 일단 더미데이터 넣을것임.
-        alert(postNum)
-        console.log(this)
+    async setSubCatInfo(current) {
+        const subCatInfoRetrievAddr = `/blog/subCatInfo${current.params.scid}`
+        const instance = Axios.create({
+            baseURL: `http://localhost:4000/`,
+            timeout: 3000,
+        })
+
+        try {
+            const response = await instance.get(subCatInfoRetrievAddr)
+            var retPostNumMap = []
+            // first index at '0' is dummy.
+            retPostNumMap.push(0)
+
+            for (var key in response.data.pages) {
+                retPostNumMap.push(response.data.pages[key]['p_id'])
+            }
+
+            this.setState({
+                subCatNumber: this.props.match.params.scid,
+                subCatSubject: response.data.sc_subject,
+                postTotalCount: retPostNumMap.length - 1,
+                postNumber: retPostNumMap.length - 1,
+                postNumMap: retPostNumMap,
+            })
+
+        } catch (error) {
+            console.error(error)
+        }
     }
 
-    componentWillReceiveProps() {
-        alert(this.props.match.params.scid)
+    async setPostData(postId) {
+        const postDataRetrievAddr = `/blog/postData${postId}`
+        const instance = Axios.create({
+            baseURL: `http://localhost:4000/`,
+            timeout: 3000,
+        })
+
+        try {
+            const response = await instance.get(postDataRetrievAddr)
+            
+            this.setState({
+                postSubject: response.data.page_subject,
+                postDate: response.data.create_date,
+                postBody: response.data.page_body,
+            })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    navHandler = (postNum) => {
+        this.setPostData(postNum)
     }
 
     render() {
-        return <div className="view-post">
-            <div className="view-post-sub-category-subject">
-                {this.state.subCatSubject}
-            </div>
-            <div className="view-post-subject">
-                {this.state.postSubject}
-            </div>
-            <div className="view-post-date">
-                {this.state.postDate}
-            </div>
-            <div className="view-post-body">
-                {this.state.postBody}
-            </div>
-            <center>
-                <ViewPostNums
-                totPostNum={this.state.postTotalCount}
-                curPostNum={this.state.postNumber}
-                postNumMap={this.state.postNumMap}
-                navHandler={this.navHandler}/>
-             </center>
-        </div>
+        if (this.state.subCatNumber === this.props.match.params.scid) {
+            return <div className="view-post">
+                <div className="view-post-sub-category-subject">
+                    {this.state.subCatSubject}
+                </div>
+                <div className="view-post-subject">
+                    {this.state.postSubject}
+                </div>
+                <div className="view-post-date">
+                    {this.state.postDate}
+                </div>
+                <div className="view-post-body">
+                    {this.state.postBody}
+                </div>
+                <center>
+                    <ViewPostNums
+                        totPostNum={this.state.postTotalCount}
+                        curPostNum={this.state.postNumber}
+                        postNumMap={this.state.postNumMap}
+                        navHandler={this.navHandler} />
+                </center>
+            </div>;
+        }
+        else {
+            return <div></div>
+        }
     }
 }
