@@ -53,7 +53,7 @@ export default class ViewPost extends Component {
                 postNumMap: retPostNumMap,
             })
             if(this.state.postTotalCount !== 0) {
-                this.setPostData(this.state.postNumber)
+                this.setPostData(this.state.postNumMap[this.state.postNumber])
             }
             else {
                 this.setState({
