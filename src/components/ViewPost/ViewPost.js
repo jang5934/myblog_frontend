@@ -52,7 +52,19 @@ export default class ViewPost extends Component {
                 postNumber: retPostNumMap.length - 1,
                 postNumMap: retPostNumMap,
             })
-            this.setPostData(this.state.postNumber)
+            if(this.state.postTotalCount !== 0) {
+                this.setPostData(this.state.postNumber)
+            }
+            else {
+                this.setState({
+                    subCatSubject: "해당 카테고리에 포스트가 없습니다.",
+                    postTotalCount: null,
+                    postNumber: null,
+                    postSubject: null,
+                    postDate: null,
+                    postBody: null,
+                })
+            }
 
         } catch (error) {
             console.error(error)
@@ -81,7 +93,7 @@ export default class ViewPost extends Component {
     }
 
     navHandler = (postNum) => {
-        this.setPostData(postNum)
+        this.setPostData(this.state.postNumMap[postNum])
     }
 
     render() {
